@@ -1,0 +1,17 @@
+{# templates/registration/register.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Registration{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Registration</h1>
+
+        {# Render the form #}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Register</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

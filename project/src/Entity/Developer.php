@@ -39,15 +39,6 @@ class Developer
      */
     private $salaire;
 
-    /**
-     * @ORM\OneToMany(targetEntity=WorkHour::class, mappedBy="developper")
-     */
-    private $workHours;
-
-    public function __construct()
-    {
-        $this->workHours = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -98,36 +89,6 @@ class Developer
     public function setSalaire(?int $salaire): self
     {
         $this->salaire = $salaire;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, WorkHour>
-     */
-    public function getWorkHours(): Collection
-    {
-        return $this->workHours;
-    }
-
-    public function addWorkHour(WorkHour $workHour): self
-    {
-        if (!$this->workHours->contains($workHour)) {
-            $this->workHours[] = $workHour;
-            $workHour->setDevelopper($this);
-        }
-
-        return $this;
-    }
-
-    public function removeWorkHour(WorkHour $workHour): self
-    {
-        if ($this->workHours->removeElement($workHour)) {
-            // set the owning side to null (unless already changed)
-            if ($workHour->getDevelopper() === $this) {
-                $workHour->setDevelopper(null);
-            }
-        }
 
         return $this;
     }

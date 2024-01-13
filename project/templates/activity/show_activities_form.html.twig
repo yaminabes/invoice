@@ -1,0 +1,15 @@
+{# templates/activity/show_activities_form.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Select Date Range</h2>
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.start_date) }}
+    {{ form_row(form.end_date) }}
+
+    <button type="submit">Show Activities</button>
+
+    {{ form_end(form) }}
+{% endblock %}
