@@ -1,5 +1,4 @@
 <?php
-// src/DataFixtures/UserDataFixtures.php
 namespace App\DataFixtures;
 
 use App\Entity\User;
@@ -33,9 +32,8 @@ class UserDataFixtures extends Fixture
             $user->setLastName($lastName);
             $user->setEmail('user' . $i . '@example.com');
             $user->setRoles(['ROLE_USER']);
-            $user->setBasicCost(rand(5000, 50000)); // Random basic cost between 5000 and 50000
+            $user->setBasicCost(rand(5000, 50000)); 
 
-            // Encode the password (replace 'password' with the desired password)
             $user->setPassword($this->passwordEncoder->encodePassword($user, 'password'));
 
             $manager->persist($user);

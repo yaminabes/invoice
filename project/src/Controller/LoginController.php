@@ -14,20 +14,13 @@ class LoginController extends AbstractController
      */
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        // Handle custom error messages
         $errorMessage = null;
         if ($error) {
-            if ($error->getMessageKey() === 'Bad credentials') {
-                $errorMessage = 'Invalid username or password.';
-            } else {
-                $errorMessage = $error->getMessageKey();
-            }
+            $this->addFlash('error', 'Erreur d\'authentification. Vérifiez vos identifiants.');
         }
 
         return $this->render('login/index.html.twig', [
