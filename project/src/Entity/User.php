@@ -62,10 +62,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $activities;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="developpers")
+     */
+    private $responsable;
+
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="responsable")
+     */
+    private $developpers;
+
     public function __construct()
     {
         $this->invoices = new ArrayCollection();
         $this->activities = new ArrayCollection();
+        $this->developpers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -255,5 +266,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
+    }
+
+    public function getResponsable(): ?self
+    {
+        return $this->responsable;
+    }
+
+    public function setResponsable(?self $responsable): self
+    {
+        $this->responsable = $responsable;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getDeveloppers(): Collection
+    {
+        return $this->developpers;
+    }
+
+    public function addUser(self $user): self
+    {
+        if (!$this->developpers->contains($user)) {
+            $this->developpers[] = $user;
+            $user->setResponsable($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(self $user): self
+    {
+        if ($this->developpers->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getResponsable() === $this) {
+                $user->setResponsable(null);
+            }
+        }
+
+        return $this;
     }
 }
