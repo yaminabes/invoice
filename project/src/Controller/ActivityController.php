@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use App\Repository\EntrepriseRepository;
 
 /**
  * @Route("/activity")
@@ -30,9 +30,9 @@ class ActivityController extends AbstractController
     }
 
     /**
-     * @Route("/show-activities", name="app_show_activities", methods={"GET","POST"})
+     * @Route("/generate-invoice", name="app_show_activities", methods={"GET","POST"})
      */
-    public function test(Request $request, ActivityRepository $activityRepository, PdfInvoiceGenerator $pdfService): Response
+    public function generateInvoice(Request $request, ActivityRepository $activityRepository, PdfInvoiceGenerator $pdfService, EntrepriseRepository $entrepriseRepository): Response
     {
         // Create the form
         $form = $this->createForm(InvoiceDateRangeType::class);
@@ -49,27 +49,25 @@ class ActivityController extends AbstractController
             $currentUser = $this->getUser();
             // all activities between two dates
             $activities = $activityRepository->findActivitiesBetweenDates($startDate, $endDate, $currentUser);
+            $firstClientEntreprise = $entrepriseRepository->findOneBy(['isClient' => true], ['id' => 'ASC']);
+            $firstCurrentEntreprise = $entrepriseRepository->findOneBy(['isCurrent' => true], ['id' => 'ASC']);
 
             foreach ($activities as $activity) {
                 if ($activity->isStatus()) {
                     $totalCost += $activity->calculateTotalCost();
                 }
             }
-            $html = $this->render('activity/show_activities.html.twig', [
-                'form' => $form->createView(),
-                'activities' => $activities,
-                'startDate' => $startDate,
-                'endDate' => $endDate,
-                'totalCost' => $totalCost,
-            ]);
 
-            $pdfService->generateInvoice($startDate, $endDate);
+
+            $pdfService->generateInvoice($startDate, $endDate, $firstClientEntreprise, $firstCurrentEntreprise);
             return $this->render('activity/show_activities.html.twig', [
                 'form' => $form->createView(),
                 'activities' => $activities,
                 'startDate' => $startDate,
                 'endDate' => $endDate,
                 'totalCost' => $totalCost,
+                'client' => $firstClientEntreprise,
+                'current_entreprise' => $firstCurrentEntreprise,
             ]);
         }
 
