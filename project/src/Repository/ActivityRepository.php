@@ -41,20 +41,28 @@ class ActivityRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find activities between given start and end dates
+     * Find activities between given start and end dates for a specific responsible user.
      *
      * @param \DateTime $startDate
      * @param \DateTime $endDate
+     * @param User|null $responsable
      * @return Activity[]
      */
-    public function findActivitiesBetweenDates(\DateTime $startDate, \DateTime $endDate): array
+    public function findActivitiesBetweenDates(\DateTime $startDate, \DateTime $endDate, ?User $responsable): array
     {
-        return $this->createQueryBuilder('a')
+        $queryBuilder = $this->createQueryBuilder('a')
             ->andWhere('a.date BETWEEN :startDate AND :endDate')
             ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate)
-            ->getQuery()
-            ->getResult();
+            ->setParameter('endDate', $endDate);
+
+        if ($responsable instanceof User) {
+            $queryBuilder
+                ->join('a.user', 'u')
+                ->andWhere('u.responsable = :responsable')
+                ->setParameter('responsable', $responsable);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Entity\Activity;
 use App\Form\ActivityType;
 use App\Form\InvoiceDateRangeType;
 use App\Repository\ActivityRepository;
+use App\Service\PdfInvoiceGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,7 @@ class ActivityController extends AbstractController
     /**
      * @Route("/show-activities", name="app_show_activities", methods={"GET","POST"})
      */
-    public function test(Request $request, ActivityRepository $activityRepository): Response
+    public function test(Request $request, ActivityRepository $activityRepository, PdfInvoiceGenerator $pdfService): Response
     {
         // Create the form
         $form = $this->createForm(InvoiceDateRangeType::class);
@@ -44,15 +45,25 @@ class ActivityController extends AbstractController
             $endDate = $form->get('end_date')->getData();
             $totalCost = 0;
 
+            //responsable
+            $currentUser = $this->getUser();
             // all activities between two dates
-            $activities = $activityRepository->findActivitiesBetweenDates($startDate, $endDate);
+            $activities = $activityRepository->findActivitiesBetweenDates($startDate, $endDate, $currentUser);
 
             foreach ($activities as $activity) {
                 if ($activity->isStatus()) {
                     $totalCost += $activity->calculateTotalCost();
                 }
             }
+            $html = $this->render('activity/show_activities.html.twig', [
+                'form' => $form->createView(),
+                'activities' => $activities,
+                'startDate' => $startDate,
+                'endDate' => $endDate,
+                'totalCost' => $totalCost,
+            ]);
 
+            $pdfService->generateInvoice($startDate, $endDate);
             return $this->render('activity/show_activities.html.twig', [
                 'form' => $form->createView(),
                 'activities' => $activities,
