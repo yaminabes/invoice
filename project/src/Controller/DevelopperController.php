@@ -20,8 +20,10 @@ class DevelopperController extends AbstractController
      */
     public function index(UserRepository $userRepository): Response
     {
+        $currentUser = $this->getUser();
+        $developpeurs = $currentUser->getDeveloppers();
         return $this->render('developper/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $developpeurs,
         ]);
     }
 
