@@ -14,7 +14,6 @@ class SupplementType extends AbstractType
         $builder
             ->add('label')
             ->add('percentage')
-            ->add('activities')
         ;
     }
 

@@ -1,12 +1,13 @@
 {# templates/registration/register.html.twig #}
 
 {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-{% block title %}Registration{% endblock %}
+{% block title %}Ajout de responsable{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>Registration</h1>
+        <h1>Ajouter un responsable</h1>
 
         {# Render the form #}
         {{ form_start(form) }}

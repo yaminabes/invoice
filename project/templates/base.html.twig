@@ -52,10 +52,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                         </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/register">Register</a>
-                        </li>
+                    
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Ajouter un responsable</a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                 </ul>
             </div>

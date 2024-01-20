@@ -43,7 +43,7 @@ class Activity
     {
         $this->supplements = new ArrayCollection();
     }
-    
+
 
 
     public function getId(): ?int
@@ -131,5 +131,8 @@ class Activity
 
         return $totalCost;
     }
-
+    public function __toString(): string
+    {
+        return $this->user ;
+    }
 }
