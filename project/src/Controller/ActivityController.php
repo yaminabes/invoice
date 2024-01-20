@@ -22,8 +22,9 @@ class ActivityController extends AbstractController
      */
     public function index(ActivityRepository $activityRepository): Response
     {
+        $currentUser = $this->getUser();
         return $this->render('activity/index.html.twig', [
-            'activities' => $activityRepository->findAll(),
+            'activities' => $activityRepository->findActivitiesByResponsable($currentUser),
         ]);
     }
 

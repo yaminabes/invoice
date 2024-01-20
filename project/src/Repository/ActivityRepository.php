@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Activity;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -56,28 +57,19 @@ class ActivityRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-//    /**
-//     * @return Activity[] Returns an array of Activity objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Activity
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Find activities of developpeurs under the responsibility of the given responsable.
+     *
+     * @param User $responsable
+     * @return Activity[]
+     */
+    public function findActivitiesByResponsable(User $responsable): array
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.user', 'u')
+            ->andWhere('u.responsable = :responsable')
+            ->setParameter('responsable', $responsable)
+            ->getQuery()
+            ->getResult();
+    }
 }
