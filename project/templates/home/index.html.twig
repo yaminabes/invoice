@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Bienvenue sur votre Projet de Facturation{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper { margin: 2em auto; max-width: 800px; width: 95%; font: 20px/1.6 sans-serif; text-align: center; border: 2px solid #ddd; padding: 20px; border-radius: 10px; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .example-wrapper h1, .example-wrapper p { margin-bottom: 20px; }
+    .calculator-icon, .list-icon, .invoice-icon { font-size: 2em; margin-right: 10px; vertical-align: middle; color: #3498db; } /* Couleur bleue */
+    .start-button, .list-button, .invoice-button { display: inline-block; padding: 10px 20px; font-size: 1.2em; text-decoration: none; background-color: #2ecc71; color: #fff; border-radius: 5px; margin-right: 10px; }
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
+    <h1><span class="calculator-icon">🖩</span> Bienvenue sur votre Projet de Facturation!</h1>
+    <p>C'est ici que vous pourrez gérer et suivre les facturations des développeurs travaillant sur vos projets. Utilisez les fonctionnalités disponibles pour créer, visualiser et télécharger vos factures en toute simplicité.</p>
 </div>
 {% endblock %}
