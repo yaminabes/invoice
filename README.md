@@ -32,11 +32,13 @@ Once inside the Symfony container, navigate to the project directory and run com
 ```bash
 cd /var/www/project
 composer install
+```
+## Make migrations
+```bash
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
 ```
-
-
+## Load fake data
 ```bash
 php bin/console doctrine:fixtures:load
 ```
