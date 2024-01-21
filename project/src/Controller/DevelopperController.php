@@ -28,6 +28,17 @@ class DevelopperController extends AbstractController
     }
 
     /**
+     * @Route("/admin-index", name="app_admin_developper_index", methods={"GET"})
+     */
+    public function admin_index(UserRepository $userRepository): Response
+    {
+        $developpeurs = $userRepository->findAll();
+        return $this->render('developper/index.html.twig', [
+            'users' => $developpeurs,
+        ]);
+    }
+
+    /**
      * @Route("/new", name="app_developper_new", methods={"GET", "POST"})
      */
     public function new(Request $request, UserRepository $userRepository): Response
@@ -35,13 +46,20 @@ class DevelopperController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer l'utilisateur connecté
+            $currentUser = $this->getUser();
+    
+            // Attribuer l'utilisateur connecté en tant que responsable
+            $user->setResponsable($currentUser);
+    
+            // Enregistrer l'utilisateur créé
             $userRepository->add($user, true);
-
+    
             return $this->redirectToRoute('app_developper_index', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->renderForm('developper/new.html.twig', [
             'user' => $user,
             'form' => $form,
