@@ -57,9 +57,9 @@ class ActivityController extends AbstractController
                     $totalCost += $activity->calculateTotalCost();
                 }
             }
+            
 
-
-            $pdfService->generateInvoice($startDate, $endDate, $firstClientEntreprise, $firstCurrentEntreprise);
+            $pdfService->generateInvoice($startDate, $endDate, $firstClientEntreprise, $firstCurrentEntreprise,$activities);
             return $this->render('activity/show_activities.html.twig', [
                 'form' => $form->createView(),
                 'activities' => $activities,
