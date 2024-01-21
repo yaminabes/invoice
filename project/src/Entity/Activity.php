@@ -124,7 +124,7 @@ class Activity
         $totalCost = $basicCost;
 
         foreach ($this->getSupplements() as $supplement) {
-            if ($this->isStatus()) {
+             {
                 $totalCost += ($basicCost * ($supplement->getPercentage() / 100));
             }
         }
