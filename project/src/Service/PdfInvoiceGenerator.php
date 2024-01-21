@@ -34,12 +34,15 @@ class PdfInvoiceGenerator
     }
     public function generateInvoice(\DateTimeInterface $startDate, \DateTimeInterface $endDate, Entreprise $clientEntreprise, Entreprise $currentEntreprise, array $activities): string
     {
+        $invoiceNumber = 'F' . date('Y') . date('m') . date('d');
+   
         $data = [
             'activities'=> $activities,
             'startDate' => $startDate,
             'endDate' => $endDate,
             'clientEntreprise' => $clientEntreprise,
             'currentEntreprise' => $currentEntreprise,
+            'invoiceNumber' => $invoiceNumber,
         ];
         $html = $this->renderInvoiceHtml($data);
 
@@ -99,7 +102,7 @@ class PdfInvoiceGenerator
         $html .= '<div class="invoice-details">';
         $html .= '<table>';
         $html .= '<tr><th>Date de la facture</th><td>' . date('Y-m-d') . '</td></tr>';
-        $html .= '<tr><th>Numéro de la facture</th><td>001</td></tr>';
+        $html .= '<tr><th>Numéro de la facture</th><td>' . $data['invoiceNumber'] . '</td></tr>';
         $html .= '<tr><th>Informations de l\'entreprise</th>';
         $html .= '<td>';
         $html .= 'Nom de votre entreprise: ' . $currentEntreprise->getDenominationSociale() . '<br>';
