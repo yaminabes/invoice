@@ -3,16 +3,16 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-{% block title %}Ajout de responsable{% endblock %}
+{% block title %}Ajout de Responsable{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>Ajouter un responsable</h1>
+        <h1>Ajouter un Responsable</h1>
 
-        {# Render the form #}
+        {# Affichage du formulaire #}
         {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

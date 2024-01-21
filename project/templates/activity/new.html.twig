@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Activity{% endblock %}
+{% block title %}Créer une Nouvelle Activité{% endblock %}
 
 {% block body %}
-    <h1>Create new Activity</h1>
+    <h1>Créer une Nouvelle Activité</h1>
 
     {{ include('activity/_form.html.twig') }}
 
-    <a href="{{ path('app_activity_index') }}">back to list</a>
+    <div class="d-flex justify-content-end">
+        <a type="button" class="btn btn-dark" href="{{ path('app_activity_index') }}">Retour à la liste</a>
+    </div>
 {% endblock %}

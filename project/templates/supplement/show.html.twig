@@ -1,30 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Supplement{% endblock %}
+{% block title %}Détails du Supplément{% endblock %}
 
 {% block body %}
-    <h1>Supplement</h1>
+    <h1>Détails du Supplément</h1>
 
-    <table class="table">
+    <table class="table table-dark table-striped">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <td>{{ supplement.id }}</td>
             </tr>
             <tr>
-                <th>Label</th>
+                <th>Libellé</th>
                 <td>{{ supplement.label }}</td>
             </tr>
             <tr>
-                <th>Percentage</th>
-                <td>{{ supplement.percentage }}</td>
+                <th>Pourcentage</th>
+                <td>{{ supplement.percentage }}%</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_supplement_index') }}">back to list</a>
-
-    <a href="{{ path('app_supplement_edit', {'id': supplement.id}) }}">edit</a>
+    <div class="d-flex justify-content-between">
+        <a role="button" class="btn btn-primary" href="{{ path('app_supplement_edit', {'id': supplement.id}) }}">Modifier</a>
+        <a role="button" class="btn btn-dark" href="{{ path('app_supplement_index') }}">Retour à la liste</a>
+    </div>
 
     {{ include('supplement/_delete_form.html.twig') }}
 {% endblock %}

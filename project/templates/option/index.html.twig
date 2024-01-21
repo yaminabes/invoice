@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Option index{% endblock %}
+{% block title %}Liste des Options{% endblock %}
 
 {% block body %}
-    <h1>Option index</h1>
+    <h1>Liste des Options</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>Percentage</th>
-                <th>actions</th>
+                <th>ID</th>
+                <th>Libellé</th>
+                <th>Pourcentage</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,19 +19,19 @@
             <tr>
                 <td>{{ option.id }}</td>
                 <td>{{ option.label }}</td>
-                <td>{{ option.percentage }}</td>
+                <td>{{ option.percentage }}%</td>
                 <td>
-                    <a href="{{ path('app_option_show', {'id': option.id}) }}">show</a>
-                    <a href="{{ path('app_option_edit', {'id': option.id}) }}">edit</a>
+                    <a href="{{ path('app_option_show', {'id': option.id}) }}" class="btn btn-secondary">Afficher</a>
+                    <a href="{{ path('app_option_edit', {'id': option.id}) }}" class="btn btn-primary">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_option_new') }}">Create new</a>
+    <a href="{{ path('app_option_new') }}" class="btn btn-dark">Créer une nouvelle option</a>
 {% endblock %}

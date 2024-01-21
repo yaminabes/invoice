@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Entreprise index{% endblock %}
+{% block title %}Liste des Entreprises{% endblock %}
 
 {% block body %}
-    <h1>Entreprise index</h1>
+    <h1>Liste des Entreprises</h1>
 
-    <table class="table">
+    <table class="table table-dark table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Denomination_sociale</th>
+                <th>ID</th>
+                <th>Dénomination Sociale</th>
                 <th>Adresse</th>
-                <th>Adresse_livraison</th>
-                <th>Adresse_facturation</th>
-                <th>Siren</th>
-                <th>IsClient</th>
-                <th>IsCurrent</th>
-                <th>actions</th>
+                <th>Adresse de Livraison</th>
+                <th>Adresse de Facturation</th>
+                <th>SIREN</th>
+                <th>Client</th>
+                <th>Actuelle</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -28,20 +28,20 @@
                 <td>{{ entreprise.adresseLivraison }}</td>
                 <td>{{ entreprise.adresseFacturation }}</td>
                 <td>{{ entreprise.siren }}</td>
-                <td>{{ entreprise.isClient ? 'Yes' : 'No' }}</td>
-                <td>{{ entreprise.isCurrent ? 'Yes' : 'No' }}</td>
+                <td>{{ entreprise.isClient ? 'Oui' : 'Non' }}</td>
+                <td>{{ entreprise.isCurrent ? 'Oui' : 'Non' }}</td>
                 <td>
-                    <a href="{{ path('app_entreprise_show', {'id': entreprise.id}) }}">show</a>
-                    <a href="{{ path('app_entreprise_edit', {'id': entreprise.id}) }}">edit</a>
+                    <a href="{{ path('app_entreprise_show', {'id': entreprise.id}) }}" class="btn btn-secondary">Afficher</a>
+                    <a href="{{ path('app_entreprise_edit', {'id': entreprise.id}) }}" class="btn btn-primary">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_entreprise_new') }}">Create new</a>
+    <a href="{{ path('app_entreprise_new') }}" class="btn btn-dark">Créer une nouvelle entreprise</a>
 {% endblock %}

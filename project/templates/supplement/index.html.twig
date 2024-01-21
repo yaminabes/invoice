@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Supplement index{% endblock %}
+{% block title %}Index des Suppléments{% endblock %}
 
 {% block body %}
-    <h1>Supplement index</h1>
+    <h1>Liste des Suppléments</h1>
 
-    <table class="table">
+    <table class="table table-dark table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>Percentage</th>
-                <th>actions</th>
+                <th>ID</th>
+                <th>Libellé</th>
+                <th>Pourcentage</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,19 +19,19 @@
             <tr>
                 <td>{{ supplement.id }}</td>
                 <td>{{ supplement.label }}</td>
-                <td>{{ supplement.percentage }}</td>
+                <td>{{ supplement.percentage }}%</td>
                 <td>
-                    <a href="{{ path('app_supplement_show', {'id': supplement.id}) }}">show</a>
-                    <a href="{{ path('app_supplement_edit', {'id': supplement.id}) }}">edit</a>
+                    <a role="button" class="btn btn-secondary" href="{{ path('app_supplement_show', {'id': supplement.id}) }}">Afficher</a>
+                    <a role="button" class="btn btn-primary" href="{{ path('app_supplement_edit', {'id': supplement.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_supplement_new') }}">Create new</a>
+    <a type="button" class="btn btn-dark" href="{{ path('app_supplement_new') }}">Créer un nouveau</a>
 {% endblock %}

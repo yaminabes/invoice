@@ -1,30 +1,26 @@
-{# templates/activity/show_activities.html.twig #} {% extends 'base.html.twig'
-%} {% block body %}
-<h2>
-  Activities between {{ startDate|date('Y-m-d') }} and {{ endDate|date('Y-m-d')
-  }}
-</h2>
+{% extends 'base.html.twig' %}
 
-{% if activities is empty %}
-<p>No activities found for the selected date range.</p>
-{% endif %}
+{% block body %}
+    <h2>Activités du {{ startDate|date('d/m/Y') }} au {{ endDate|date('d/m/Y') }}</h2>
 
-
-{% for activity in activities %} {% if activity.isStatus() %}
-<h2> {{ activity.getUser() }}</h2>
-<p>Date: {{ activity.getDate() | date('Y-m-d H:i:s') }}
-Status: {{ activity.isStatus() ? 'Active' : 'Inactive' }}</p>
-
-<h6>Supplements:</h6>
-<ul>
-  {% for supplement in activity.getSupplements() %}
-  <li>{{ supplement.getLabel() }} - {{ supplement.getPercentage() }}%</li>
-  {% endfor %}
-</ul>
-
-<p>Total Cost: {{ activity.calculateTotalCost() }}</p>
-{% endif %} 
-{% endfor %} 
-<h1>Total</h1>
-<p>{{totalCost}}</p>
+    {% if activities is empty %}
+        <p>Aucune activité trouvée pour la période sélectionnée.</p>
+    {% else %}
+        {% for activity in activities %}
+            <div>
+                <h3>Activité de {{ activity.user }}</h3>
+                <p>Date : {{ activity.date | date('d/m/Y H:i') }}</p>
+                <p>Statut : {{ activity.status ? 'Actif' : 'Inactif' }}</p>
+                <h6>Suppléments :</h6>
+                <ul>
+                    {% for supplement in activity.supplements %}
+                        <li>{{ supplement.label }} - {{ supplement.percentage }}%</li>
+                    {% endfor %}
+                </ul>
+                <p>Coût Total : {{ activity.calculateTotalCost() }}</p>
+            </div>
+        {% endfor %}
+        <h1>Total</h1>
+        <p>{{ totalCost }}</p>
+    {% endif %}
 {% endblock %}

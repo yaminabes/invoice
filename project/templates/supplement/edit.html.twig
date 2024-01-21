@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Supplement{% endblock %}
+{% block title %}Modifier un Supplément{% endblock %}
 
 {% block body %}
-    <h1>Edit Supplement</h1>
+    <h1>Modifier un Supplément</h1>
 
-    {{ include('supplement/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('supplement/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('app_supplement_index') }}">back to list</a>
-
-    {{ include('supplement/_delete_form.html.twig') }}
+    <div class="d-flex justify-content-between mt-3">
+        <a role="button" class="btn btn-dark" href="{{ path('app_supplement_index') }}">Retour à la liste</a>
+        {{ include('supplement/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

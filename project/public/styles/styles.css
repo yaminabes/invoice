@@ -1,0 +1,7 @@
+.table-active {
+    background-color: green; /* ou toute autre couleur pour les lignes actives */
+}
+
+.table-inactive {
+    background-color: red; /* ou toute autre couleur pour les lignes inactives */
+}

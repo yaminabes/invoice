@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Supplement{% endblock %}
+{% block title %}Créer un Nouveau Supplément{% endblock %}
 
 {% block body %}
-    <h1>Create new Supplement</h1>
+    <h1>Créer un Nouveau Supplément</h1>
 
     {{ include('supplement/_form.html.twig') }}
 
-    <a href="{{ path('app_supplement_index') }}">back to list</a>
+    <a href="{{ path('app_supplement_index') }}" class="btn btn-dark">Retour à la liste</a>
 {% endblock %}

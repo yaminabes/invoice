@@ -1,6 +1,7 @@
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="text-center">
+        <button class="btn btn-primary">{{ button_label|default('Update') }}</button>
+    </div>
 {{ form_end(form) }}
-

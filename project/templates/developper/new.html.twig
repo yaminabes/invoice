@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}Créer un Nouveau Développeur{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+    <h1>Créer un Nouveau Développeur</h1>
 
     {{ include('developper/_form.html.twig') }}
 
-    <a href="{{ path('app_developper_index') }}">back to list</a>
+    <div class="d-flex justify-content-end">
+        <a type="button" class="btn btn-dark" href="{{ path('app_developper_index') }}">Retour à la liste</a>
+    </div>
 {% endblock %}

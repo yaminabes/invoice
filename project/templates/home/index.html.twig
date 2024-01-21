@@ -1,18 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue sur votre Projet de Facturation{% endblock %}
+{% block title %}Bienvenue sur votre Logiciel de Facturation{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 2em auto; max-width: 800px; width: 95%; font: 20px/1.6 sans-serif; text-align: center; border: 2px solid #ddd; padding: 20px; border-radius: 10px; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    .example-wrapper h1, .example-wrapper p { margin-bottom: 20px; }
-    .calculator-icon, .list-icon, .invoice-icon { font-size: 2em; margin-right: 10px; vertical-align: middle; color: #3498db; } /* Couleur bleue */
-    .start-button, .list-button, .invoice-button { display: inline-block; padding: 10px 20px; font-size: 1.2em; text-decoration: none; background-color: #2ecc71; color: #fff; border-radius: 5px; margin-right: 10px; }
-</style>
+<div class="container mt-5">
+    <!-- Titre et Introduction -->
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h1>Bienvenue sur votre Logiciel de Facturation</h1>
+            <p>Gérez vos factures, développeurs, activités et suppléments en toute simplicité.</p>
+        </div>
+    </div>
 
-<div class="example-wrapper">
-    <h1><span class="calculator-icon">🖩</span> Bienvenue sur votre Projet de Facturation!</h1>
-    <p>C'est ici que vous pourrez gérer et suivre les facturations des développeurs travaillant sur vos projets. Utilisez les fonctionnalités disponibles pour créer, visualiser et télécharger vos factures en toute simplicité.</p>
+    <!-- Dashboard -->
+    <div class="row">
+        <!-- Accès rapide aux différentes pages -->
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Développeurs</h5>
+                    <p class="card-text">Gérez les informations de vos développeurs.</p>
+                    <a href="{{ path('app_developper_index') }}" class="btn btn-primary">Voir les Développeurs</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Activités</h5>
+                    <p class="card-text">Suivez les activités et les heures travaillées.</p>
+                    <a href="{{ path('app_activity_index') }}" class="btn btn-primary">Voir les Activités</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Suppléments</h5>
+                    <p class="card-text">Gérez les suppléments et les coûts additionnels.</p>
+                    <a href="{{ path('app_supplement_index') }}" class="btn btn-primary">Voir les Suppléments</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Connexion</h5>
+                    <p class="card-text">Accédez à votre espace personnel.</p>
+                    <a href="{{ path('app_login') }}" class="btn btn-success">Se Connecter</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Déconnexion</h5>
+                    <p class="card-text">Terminez votre session en toute sécurité.</p>
+                    <a href="{{ path('app_logout') }}" class="btn btn-warning">Se Déconnecter</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
