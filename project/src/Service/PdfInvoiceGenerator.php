@@ -77,14 +77,16 @@ class PdfInvoiceGenerator
         $html .= '<meta charset="UTF-8">';
         $html .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
         $html .= '<title>Facture</title>';
+        
         $html .= '<style>';
         $html .= 'body { font-family: Arial, sans-serif; }';
         $html .= '.invoice-header { text-align: center; padding: 20px; background-color: #f0f0f0; }';
         $html .= '.invoice-details { margin: 20px 0; }';
         $html .= '.invoice-details table { width: 100%; border-collapse: collapse; margin-top: 10px; }';
         $html .= '.invoice-details th, .invoice-details td { border: 1px solid #ddd; padding: 8px; text-align: left; }';
-        $html .= '.invoice-total { margin-top: 20px; text-align: right; }';
+        $html .= '.invoice-total { margin-top: 15px; text-align: right; }';
         $html .= '</style>';
+
         $html .= '</head>';
         $html .= '<body>';
     
@@ -123,7 +125,7 @@ class PdfInvoiceGenerator
         
         foreach ($activities as $activity) {
             $html .= '<tr>';
-            $html .= '<td>' . $activity. '</td>';
+            $html .= '<td><strong>' . $activity. '</strong></td>';
             $html .= '<td>' . $activity->getUser()->getBasicCost() . '</td>';
             $html .= '<td>' . $activity->calculateTotalCost() . '</td>';
             $html .= '</tr>';
@@ -132,7 +134,7 @@ class PdfInvoiceGenerator
             foreach ($activity->getSupplements() as $supplement) {
                 $html .= '<tr>';
                 $html .= '<td>' . $supplement->getLabel() . '</td>';
-                $html .= '<td>' . $supplement->getPercentage() . '</td>';
+                $html .= '<td>' . $supplement->getPercentage() . '%</td>';
                 $html .= '<td> </td> ';
                 $html .= '</tr>';
 
@@ -144,9 +146,9 @@ class PdfInvoiceGenerator
     
         // Invoice Total
         $html .= '<div class="invoice-total">';
-        $html .= '<p>Total HT :' .$totalHT. '€</p>';
-        $html .= '<p>TVA (20%) : ' . $tva . '€</p>';
-        $html .= '<p>Total TTC : ' . $totalTTC . '€</p>';
+        $html .= '<p>Total HT :'.$totalHT.'€</p>';
+        $html .= '<p>TVA (20%) : '. $tva .'€</p>';
+        $html .= '<p>Total TTC : '. $totalTTC .'€</p>';
         $html .= '</div>';
     
         $html .= '</body>';
